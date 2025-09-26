@@ -5,7 +5,8 @@ A small FastAPI service that accepts documents (PDF, HTML, Markdown), extracts t
 ## Quick setup
 
 ```bash
-mkdir document-analyzer-api
+# 1. clone the repo
+git clone https://github.com/atharvadudhe/document-analyzer-api.git
 cd document-analyzer-api
 
 # 2. create virtual env
@@ -62,6 +63,3 @@ uvicorn app.main:app --reload
 }
 ```
 
-## Notes & Caveats
-- Transformer summarization models can be heavy and may download weights on the first run.
-- For production use, pin model choices and consider using a GPU-backed environment or a hosted inference API.
