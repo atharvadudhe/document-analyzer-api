@@ -33,7 +33,7 @@ python -m spacy download en_core_web_sm
 
 # 5. Run the server
 uvicorn app.main:app --reload
-
+```
 
 ## Windows (PowerShell)
 
