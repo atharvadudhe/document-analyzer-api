@@ -1,28 +1,39 @@
 # document-analyzer-api
 
-A small FastAPI service that accepts documents (PDF, HTML, Markdown), extracts text, and performs a simple analysis: summary, named entities, and keywords.
+A small FastAPI service that accepts documents (PDF, HTML, Markdown, TXT), extracts text, and performs a simple analysis: summary, named entities, and keywords.
 
-## Quick setup
+## Tech Stack
+
+- **Backend Framework:** FastAPI
+- **ASGI Server:** Uvicorn
+- **Text Extraction:** PyMuPDF (PDF), BeautifulSoup4 (HTML), built-in Markdown/text parsing
+- **NLP & Analysis:** spaCy, Transformers, Torch
+- **Data Validation:** Pydantic
+- **File Handling:** python-multipart
+
+---
+
+## Quick Setup (macOS / Linux)
 
 ```bash
-# 1. clone the repo
+# 1. Clone the repo
 git clone https://github.com/atharvadudhe/document-analyzer-api.git
 cd document-analyzer-api
 
-# 2. create virtual env
+# 2. Create virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
 
-# 3. install dependencies
+# 3. Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# 4. download spaCy model
+# 4. Download spaCy English model
 python -m spacy download en_core_web_sm
 
-# 5. run the server
+# 5. Run the server
 uvicorn app.main:app --reload
-```
+
 
 ## Windows (PowerShell)
 
@@ -41,10 +52,28 @@ uvicorn app.main:app --reload
 - Accepts file upload (`multipart/form-data`) field named `file`.
 - Supported MIME types / extensions: `.pdf`, `.html` / `.htm`, `.md`, `.markdown`, `.txt`.
 - Returns extracted raw text as JSON `{ "filename": ..., "text": ... }`.
+```
+{
+  "filename": "example.pdf",
+  "text": "Extracted text here..."
+}
+```
 
 ### POST /analyze
 - Accepts JSON `{ "text": "..." }`.
+```
+{
+  "text": "Paste long text here or use text from /upload response"
+}
+```
 - Returns structured JSON with `summary`, `entities`, and `keywords`.
+```
+{
+  "summary": "Short summary of the text",
+  "entities": ["Entity1", "Entity2", "..."],
+  "keywords": ["keyword1", "keyword2", "..."]
+}
+```
 
 ## Example Postman requests
 
